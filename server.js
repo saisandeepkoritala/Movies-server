@@ -13,7 +13,6 @@ const getTvCrew = require("./apis/getTvCrew");
 const getPics = require("./apis/getPics");
 
 const app = express();
-
 app.use(cors());
 app.use(express.json());
 
@@ -86,7 +85,6 @@ app.use("/getDetails",async(req,res)=>{
     }
 })
 
-
 app.use("/getCredits",async(req,res)=>{
     if(req.body.id){
     const response = await getCredits(req.body.id);
@@ -141,56 +139,52 @@ app.use("/getLanguage",async(req,res)=>{
     })
     })
     
-
 app.use("/getCustomMovies",async(req,res)=>{
     const {year,language,country,page,selectDate,selectDate1}=req.body
     const response = await getCustomMovies(year,country,language,page,selectDate,selectDate1);
     res.json({
-                status:"success",
-                statusCode:200,
-                Movies:response
+            status:"success",
+            statusCode:200,
+            Movies:response
     })
     })
 
-    app.use("/getTv",async(req,res)=>{
-        const {year,page,selectDate,selectDate1,country,language}=req.body
-        const response = await getTv(page,selectDate,selectDate1,country,language);
-        res.json({
-                    status:"success",
-                    statusCode:200,
-                    Movies:response
-        })
-        })
+app.use("/getTv",async(req,res)=>{
+    const {year,page,selectDate,selectDate1,country,language}=req.body
+    const response = await getTv(page,selectDate,selectDate1,country,language);
+    res.json({
+            status:"success",
+            statusCode:200,
+            Movies:response
+    })
+    })
                 
-        app.use("/getTvDetail",async(req,res)=>{
-            const response = await getTvDetail(req.body.id);
-            res.json({
-                        status:"success",
-                        statusCode:200,
-                        Movies:response
-            })
-            })
-            app.use("/getTvCrew",async(req,res)=>{
-                const response = await getTvCrew(req.body.id);
-                res.json({
-                            status:"success",
-                            statusCode:200,
-                            Movies:response
-                })
-                })
+app.use("/getTvDetail",async(req,res)=>{
+    const response = await getTvDetail(req.body.id);
+    res.json({
+            status:"success",
+            statusCode:200,
+            Movies:response
+    })
+    })
 
-                app.use("/getPics",async(req,res)=>{
-                    const response = await getPics(req.body.id);
-                    res.json({
-                                status:"success",
-                                statusCode:200,
-                                Movies:response
-                    })
-                    })
+app.use("/getTvCrew",async(req,res)=>{
+    const response = await getTvCrew(req.body.id);
+    res.json({
+            status:"success",
+            statusCode:200,
+            Movies:response
+    })
+    })
 
-
-    
-
+app.use("/getPics",async(req,res)=>{
+    const response = await getPics(req.body.id);
+    res.json({
+            status:"success",
+            statusCode:200,
+            Movies:response
+    })
+    })
 
 app.listen("5000",(req,res)=>{
     console.log("running ")
