@@ -11,6 +11,8 @@ const getTv = require("./apis/getTv");
 const getTvDetail = require("./apis/getTvDetail");
 const getTvCrew = require("./apis/getTvCrew");
 const getPics = require("./apis/getPics");
+const getSearchMovie= require("./apis/getSearchMovie");
+const getMovieVideo = require("./apis/getMovieVideo");
 
 const app = express();
 app.use(cors());
@@ -186,6 +188,24 @@ app.use("/getPics",async(req,res)=>{
     })
     })
 
+app.use("/getSearchMovie",async(req,res)=>{
+    const {searchTerm,language,page,country}=req.body;
+    const response = await getSearchMovie(searchTerm,language,page,country);
+    res.json({
+            status:"success",
+            statusCode:200,
+            Movies:response
+    })
+    })    
+
+app.use("/getMovieVideo",async(req,res)=>{
+    const response = await getMovieVideo(req.body.id);
+    res.json({
+            status:"success",
+            statusCode:200,
+            Movies:response
+    })
+    })      
 app.listen("5000",(req,res)=>{
     console.log("running ")
 })
