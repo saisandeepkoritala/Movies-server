@@ -1,7 +1,8 @@
 const fetch = require('node-fetch');
 
 const getMovies=async(language)=>{
-    const url = `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&primary_release_year=2023&sort_by=popularity.desc&with_origin_country=IN&with_original_language=${language}`;
+    const year = Date.now().getFullYear();
+    const url = `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&primary_release_year=${year}&sort_by=popularity.desc&with_origin_country=IN&with_original_language=${language}`;
 
     const options = {
         method: 'GET',
