@@ -18,6 +18,21 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+app.use("/isAlive",async(req,res)=>{
+    try{
+        res.json({
+            status:"Success",
+            message:"Server is Up"
+        })
+    }
+    catch(e){
+        res.json({
+            status:"Fail",
+            message:"Server is down"
+        })
+    }
+})
+
 app.use("/getTeluguMovies",async(req,res)=>{
     const response = await getMovies("te")
 
